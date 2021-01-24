@@ -2,7 +2,7 @@ import numpy as np
 from math import pi, sin, exp
 from matplotlib import pyplot as plt
 
-#Bastante extraño xdddd
+#Bastante extraño xdddd dsadasdasdasdasd
 class FDTD:
     def __init__(self, ncells, nsteps, ddx, t_0, s_0, epsilon_r, sigma, start_m, end_m):
         self.ncells=ncells
