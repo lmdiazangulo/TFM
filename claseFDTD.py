@@ -74,9 +74,9 @@ class FDTD:
             hy[self.k_ini+1] = 0.25 * self.pulsogauss(time_step) + hy[self.k_ini+1]
             
             #Sin el print statement no funciona correctamente
-            self.boundary(ex, b_l, b_h)
+            """self.boundary(ex, b_l, b_h)
         
-            print(self.boundary(ex, b_l, b_h))
+            print(self.boundary(ex, b_l, b_h))"""
 
             # Calculate the Hy field
             for k in range(self.ncells):
