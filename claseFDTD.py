@@ -73,7 +73,7 @@ class FDTD:
 
             ex[self.k_ini] = 0.5 * self.pulsogauss(time_step) + ex[self.k_ini]
             hy[self.k_ini-1] = 0.25 * self.pulsogauss(time_step) + hy[self.k_ini-1]
-            hy[self.k_ini+1] = 0.25 * self.pulsogauss(time_step) + hy[self.k_ini+1]
+            hy[self.k_ini] = 0.25 * self.pulsogauss(time_step) + hy[self.k_ini]
             
             #Sin el print statement no funciona correctamente
             """self.boundary(ex, b_l, b_h)
@@ -115,11 +115,11 @@ class FDTD:
 
             ex[self.k_ini] = 0.5 * self.pulsogauss(time_step) + ex[self.k_ini]
             hy[self.k_ini-1] = 0.25 * self.pulsogauss(time_step) + hy[self.k_ini-1]
-            hy[self.k_ini+1] = 0.25 * self.pulsogauss(time_step) + hy[self.k_ini+1]
+            hy[self.k_ini] = 0.25 * self.pulsogauss(time_step) + hy[self.k_ini]
             
             ex2[self.k_ini] = 0.5* self.pulsogauss(time_step) + ex2[self.k_ini]
             hy2[self.k_ini-1] = 0.25* self.pulsogauss(time_step) + hy2[self.k_ini-1]
-            hy2[self.k_ini+1] = 0.25* self.pulsogauss(time_step) + hy2[self.k_ini+1]
+            hy2[self.k_ini] = 0.25* self.pulsogauss(time_step) + hy2[self.k_ini]
 
             #Sin el print statement no funciona correctamente
             """self.boundary(ex, b_l, b_h)
