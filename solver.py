@@ -2,7 +2,6 @@ import numpy as np
 from math import pi, sin, exp
 import scipy.constants as sp
 
-
 class FDTD:
     def __init__(self, mesh, pulse, time):
         self.mesh=mesh
@@ -14,6 +13,7 @@ class FDTD:
         dt=self.mesh.ddx / (2*sp.c)
         nsteps= int(self.time  / dt)
 
+        # COMENTAR: Mejor quitar nsteps, no guardar siempre todo...
         ex=np.zeros((nsteps+1,self.mesh.ncells+1))
         hy=np.zeros((nsteps+1,self.mesh.ncells+1))
     
@@ -21,35 +21,31 @@ class FDTD:
         for time_step in range(1, nsteps + 1):
 
             # Calculate the Ex field, for cycle using slice notation
+            # COMENTAR: self.mesh.material() se evalúa en cada paso.
             ex[time_step][1:] = self.mesh.material()[0][1:] * ex[time_step-1][1:] + \
             self.mesh.material()[1][1:] * (hy[time_step-1][:-1] - hy[time_step-1][1:])
 
             
             ex[time_step][self.pulse.k_ini] +=  0.5*self.pulse.pulse(time_step) 
             
-            t= time_step + 1/2
-            hy[time_step-1][self.pulse.k_ini-1] += 0.25* self.pulse.pulse(t) 
-            hy[time_step-1][self.pulse.k_ini] += 0.25* self.pulse.pulse(t)
-            
-            
             #Condiciones de contorno
             self.mesh.boundarymur(ex,time_step)
             
-            
             # Calculate the Hy field, slicing notation
             hy[time_step][:-1] = hy[time_step-1][:-1] + \
-            0.5 * (ex[time_step][:-1] - ex[time_step][1:])    
-            
-            
+            0.5 * (ex[time_step][:-1] - ex[time_step][1:])   
 
-                
+            t= time_step+1/2
+            hy[time_step][self.pulse.k_ini] += 0.25* self.pulse.pulse(t) 
+            hy[time_step][self.pulse.k_ini-1] += 0.25* self.pulse.pulse(t)                
 
         return ex
 
 
 
 #Clase para la Trasformada Rápida de Fourier
-
+# COMENTAR: Esto es mas un namespace que una clase. 
+# COMENTAR: Cuanto menos estado, mejor
 class FFT:
     def __init__(self, e1t, e2t, k_1, k_2):
         self.e1t=e1t

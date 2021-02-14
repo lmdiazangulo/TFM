@@ -2,8 +2,6 @@ import numpy as np
 import scipy.constants as sp
 from math import pi, sin, exp
 
-
-
 class Mesh:
     def __init__(self, ncells, ddx, epsilon_r, sigma, start_m, end_m):    
         self.ncells=ncells
@@ -26,17 +24,13 @@ class Mesh:
 
         return ca, cb
 
+    # COMENTAR: ¿Tiene sentido esto aqui?
     def boundarymur(self, ex, time_step): 
-        self.ex=ex   
-        self.time_step=time_step 
-
         if time_step >= 2:
                 ex[time_step][0]=ex[time_step-2][1]
                 ex[time_step][self.ncells]=ex[time_step-2][self.ncells-1]
 
-        return ex        
-
-
+# COMENTAR: ¿Tiene sentido esto aqui?
 class Source:
     def __init__(self, sourcetype, t_0, s_0, k_ini):
         self.sourcetype=sourcetype
